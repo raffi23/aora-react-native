@@ -1,4 +1,5 @@
 import { getCurrentUser } from "@/lib/appwrite";
+import { User } from "@/lib/types";
 import React, {
   createContext,
   FC,
@@ -10,7 +11,7 @@ import React, {
 import { Models } from "react-native-appwrite";
 
 type GlobalProviderProps = {
-  user?: Models.Document | null;
+  user?: User | null;
   isLoggedIn: boolean;
   isLoading: boolean;
 };
@@ -26,7 +27,7 @@ export const useGlobalContext = () => {
 };
 
 const GlobalProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [user, setUser] = useState<Models.Document | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
