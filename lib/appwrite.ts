@@ -8,7 +8,14 @@ export const appWriteConfig = {
   storageId: "66c95ba50024bda5a87d",
 };
 
-import { Account, Avatars, Client, Databases, ID } from "react-native-appwrite";
+import {
+  Account,
+  Avatars,
+  Client,
+  Databases,
+  ID,
+  Query,
+} from "react-native-appwrite";
 
 const client = new Client();
 client
@@ -71,5 +78,23 @@ export const signIn = async (email: string, password: string) => {
     } else {
       throw error;
     }
+  }
+};
+
+export const getCurrentUser = async () => {
+  try {
+    const currentAccount = await account.get();
+    if (!currentAccount) throw new Error("no currentAccount");
+
+    const currentUser = await databases.listDocuments(
+      appWriteConfig.databaseId,
+      appWriteConfig.userCollectionId,
+      [Query.equal("accountId", currentAccount.$id)]
+    );
+    if (!currentUser) throw new Error("no currentUser");
+
+    return currentUser.documents[0];
+  } catch (error) {
+    console.log(error);
   }
 };
