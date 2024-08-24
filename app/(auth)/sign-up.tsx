@@ -1,15 +1,18 @@
-import { View, Text, ScrollView, Image, Alert } from "react-native";
-import React, { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
-import { Link, router } from "expo-router";
+import FormField from "@/components/FormField";
 import { images } from "@/constants";
+import { useGlobalContext } from "@/context/GlobalProvider";
 import { createUser } from "@/lib/appwrite";
+import { User } from "@/lib/types";
+import { Link, router } from "expo-router";
+import React, { useState } from "react";
+import { Alert, Image, ScrollView, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUp = () => {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
   const [submitting, setSubmitting] = useState(false);
+  const { login } = useGlobalContext();
 
   const submit = async () => {
     if (Object.values(form).some((v) => !v))
@@ -18,7 +21,13 @@ const SignUp = () => {
     setSubmitting(true);
 
     try {
-      await createUser(form.email, form.password, form.username);
+      const user = (await createUser(
+        form.email,
+        form.password,
+        form.username
+      )) as User;
+
+      login?.(user);
 
       router.replace("/(tabs)/home");
     } catch (error) {

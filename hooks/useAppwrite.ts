@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Alert } from "react-native";
 
-const useAppwrite = <T>(fn: () => Promise<T>) => {
+const useAppwrite = <T>(fn?: () => Promise<T>) => {
   const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(false);
 
@@ -13,7 +13,7 @@ const useAppwrite = <T>(fn: () => Promise<T>) => {
     setLoading(true);
 
     try {
-      const response = await fn();
+      const response = await fn?.();
       setData(response);
     } catch (error) {
       Alert.alert((error as Error).message);
