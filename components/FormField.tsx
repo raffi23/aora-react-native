@@ -1,13 +1,13 @@
+import { icons } from "@/constants";
+import React, { FC, useState } from "react";
 import {
-  View,
+  Image,
   Text,
   TextInput,
   TextInputProps,
   TouchableOpacity,
-  Image,
+  View,
 } from "react-native";
-import React, { FC, useState } from "react";
-import { icons } from "@/constants";
 
 type Props = {
   title: string;
@@ -18,12 +18,13 @@ const FormField: FC<Props & TextInputProps> = ({
   title,
   containerStyles,
   secureTextEntry,
+  style,
   ...rest
 }) => {
   const [showPassword, setShowPassword] = useState(secureTextEntry);
 
   return (
-    <View className={`space-y-2 ${containerStyles}`}>
+    <View className={`space-y-2 ${containerStyles}`} style={style}>
       <Text className="text-base text-gray-100 font-pmedium">{title}</Text>
       <View className="flex-row items-center w-full h-16 px-4 bg-black-100 border-2 border-black-500 rounded-2xl focus:border-secondary">
         <TextInput

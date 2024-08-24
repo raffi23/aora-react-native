@@ -9,12 +9,7 @@ type Props = {
 };
 
 const VideoCard: FC<Props> = ({
-  video: {
-    title,
-    video,
-    creator: { avatar, username },
-    thumnail,
-  },
+  video: { title, video, creator, thumnail },
 }) => {
   const [play, setPlay] = useState(false);
 
@@ -25,7 +20,7 @@ const VideoCard: FC<Props> = ({
           <View className="flex-row justify-center flex-1 gap-2 items-start">
             <View className="w-[46px] h-[46px] rounded-lg border border-secondary p-0.5">
               <Image
-                source={{ uri: avatar }}
+                source={{ uri: creator?.avatar }}
                 className="w-full h-full rounded-lg"
                 resizeMode="cover"
               />
@@ -42,7 +37,7 @@ const VideoCard: FC<Props> = ({
                 className="text-xs text-gray-100 font-pregular"
                 numberOfLines={1}
               >
-                {username}
+                {creator?.username}
               </Text>
             </View>
           </View>
