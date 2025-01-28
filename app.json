@@ -1,5 +1,6 @@
 {
   "expo": {
+    "newArchEnabled": true,
     "name": "RhymeCode",
     "slug": "rhymecode",
     "version": "1.0.0",
@@ -13,8 +14,7 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
-      "package": "com.rhymecode.aora"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {

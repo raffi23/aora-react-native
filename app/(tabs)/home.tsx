@@ -9,7 +9,14 @@ import { getAllPosts, getLatestPosts } from "@/lib/appwrite";
 import { Post } from "@/lib/types";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { FlatList, Image, RefreshControl, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
@@ -29,7 +36,15 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView
+      className="bg-primary h-full"
+      edges={{
+        bottom: "off",
+        top: "additive",
+        left: "additive",
+        right: "additive",
+      }}
+    >
       <FlatList
         data={data}
         keyExtractor={(item) => `${item.$id}`}

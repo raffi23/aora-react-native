@@ -14,7 +14,7 @@ const VideoCard: FC<Props> = ({
   const [play, setPlay] = useState(false);
 
   return (
-    <View className="items-center px-4 mb-14">
+    <View className="items-center px-4 mb-14 ">
       <View className="flex-row gap-3 items-start">
         <View className="justify-between items-center flex-row flex-1">
           <View className="flex-row justify-center flex-1 gap-2 items-start">
